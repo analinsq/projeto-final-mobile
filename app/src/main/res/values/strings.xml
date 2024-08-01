@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">ProjetoFinalMobile</string>
+    <string name="validation_fill_all_fields">Por favor, preencha todos os campos</string>
+    <string name="text_cadastro">É novo por aqui? Faça seu cadastro e vamos nessa!</string>
+    <string name="finish_register">Finalizar Cadastro</string>
+    <string name="confirm_password">Confirme sua senha</string>
+    <string name="password_edit">Digite sua senha</string>
+    <string name="email_edit">Digite seu email</string>
+    <string name="name_edit">Digite seu nome</string>
+
+    <!--    Erros Firebase Authentication-->
+    <string name="account_not_registered_register_fragment">Nenhuma conta encontrada com este e-mail.</string>
+    <string name="invalid_email_register_fragment">Insira um e-mail válido.</string>
+    <string name="invalid_password_register_fragment">Senha inválida, tente novamente.</string>
+    <string name="email_in_use_register_fragment">Este e-mail já está em uso.</string>
+    <string name="strong_password_register_fragment">Insira uma senha mais forte.</string>
+    <string name="error_generic">Ocorreu um erro, por favor tente novamente mais tarde.</string>
+    <string name="text_post_update_sucess">Post Atualizado</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

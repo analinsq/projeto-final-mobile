@@ -8,11 +8,11 @@ class OlaUserPreferences(context: Context) {
     private val sharedPreferences: SharedPreferences =
         context.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
 
-    fun saveUserName(username: String, str: String) {
-        sharedPreferences.edit().putString(username, str).apply()
+    fun saveUserName(username: String) {
+        sharedPreferences.edit().putString("USER_NAME", username).apply()
     }
 
     fun getUserName(username: String): String {
-        return sharedPreferences.getString(username, "") ?: ""
+        return sharedPreferences.getString("USER_NAME", "") ?: ""
     }
 }

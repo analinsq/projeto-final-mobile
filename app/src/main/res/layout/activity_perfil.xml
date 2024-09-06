@@ -18,13 +18,6 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <ImageButton
-            android:id="@+id/bt_msg"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_margin="10dp"
-            android:background="@drawable/msg" />
-
-        <ImageButton
             android:id="@+id/bt_perfiluser"
             android:layout_width="50dp"
             android:layout_height="50dp"

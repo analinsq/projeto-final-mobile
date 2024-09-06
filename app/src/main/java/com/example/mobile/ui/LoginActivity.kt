@@ -2,6 +2,7 @@ package com.example.mobile.ui
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.mobile.databinding.ActivityLoginBinding
 import com.google.android.material.snackbar.Snackbar
@@ -25,58 +26,63 @@ class LoginActivity : AppCompatActivity() {
             val email = binding.etEmail.text.toString()
             val password = binding.etPassword.text.toString()
 
-            if (email.isEmpty() || password.isEmpty()) {
-                val snackbar = Snackbar.make(
-                    view, "Preencha todos os campos!",
-                    Snackbar.LENGTH_SHORT
-                )
-                snackbar.setBackgroundTint(Color.RED)
-                snackbar.show()
+            if (email.isNotEmpty() && password.isNotEmpty()) {
+                loginUser(email, password)
             } else {
-                auth.signInWithEmailAndPassword(email,password).addOnCompleteListener {autenticacao ->
-                    if(autenticacao.isSuccessful){
-                        startActivity(Intent(this, MainActivity::class.java))
-                    }
-                }
+                Toast.makeText(this, "Por favor, preencha todos os campos", Toast.LENGTH_SHORT).show()
             }
         }
-
-
-
-//                .addOnCompleteListener { autentication ->
-//                    if (autentication.isSuccessful) {
-//                        startActivity(Intent(this, MainActivity::class.java))
-//                    }
-//                }.addOnFailureListener { exception ->
-//                    val Error = when (exception) {
-//                        is FirebaseAuthWeakPasswordException -> "Digite uma senha com no mínimo 6 caracteres!"
-//                        is FirebaseAuthInvalidCredentialsException -> "Digite um email válido!"
-//                        is FirebaseAuthInvalidUserException -> "Email não cadastrado!"
-//                        is FirebaseNetworkException -> "Sem conexão com a rede"
-//                        else -> "Ops!, Algo deu errado!"
-//                    }
-//                    val snackbar = Snackbar.make(view, Error, Snackbar.LENGTH_SHORT)
-//                    snackbar.setBackgroundTint(Color.RED)
-//                    snackbar.show()
-//                }
-//            }
-//        }
 
         binding.tvRegister.setOnClickListener{
             startActivity(Intent(this, RegisterUserActivity::class.java))
         }
-        binding.tvForgotPassword.setOnClickListener {
 
+        binding.tvForgotPassword.setOnClickListener {
+            val email = binding.etEmail.text.toString()
+            if (email.isNotEmpty()) {
+                auth.sendPasswordResetEmail(email)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            Toast.makeText(this, "Email de recuperação enviado", Toast.LENGTH_SHORT).show()
+                        } else {
+                            Toast.makeText(this, "Falha ao enviar email de recuperação: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+            } else {
+                Toast.makeText(this, "Por favor, insira seu email", Toast.LENGTH_SHORT).show()
+            }
         }
+    }
+
+    private fun loginUser(email: String, password: String) {
+        auth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                } else {
+                    val exception = task.exception
+                    val message = when (exception) {
+                        is FirebaseAuthInvalidCredentialsException -> "Credenciais inválidas"
+                        is FirebaseAuthInvalidUserException -> "Usuário não encontrado"
+                        is FirebaseAuthWeakPasswordException -> "Senha fraca"
+                        is FirebaseNetworkException -> "Erro de rede"
+                        else -> "Falha na autenticação: ${exception?.message}"
+                    }
+                    Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+                }
+            }
     }
 
     override fun onStart() {
         super.onStart()
-
-        val atualUser = FirebaseAuth.getInstance().currentUser
-        if(atualUser != null){
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
             startActivity(Intent(this, MainActivity::class.java))
+            //finish()
         }
     }
 }
+
 

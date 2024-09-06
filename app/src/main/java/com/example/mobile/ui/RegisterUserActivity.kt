@@ -31,10 +31,10 @@ class RegisterUserActivity : AppCompatActivity() {
 
     private fun registerUser(username: String, email: String, password: String) {
         if (validateData(username, email, password)) {
-            auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
+            FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password).addOnCompleteListener(){
                 if (it.isSuccessful) {
                     startActivity(Intent(this, LoginActivity::class.java))
-                    OlaUserPreferences(this).saveUserName("user_name", username)
+                    OlaUserPreferences(this).saveUserName(username)
                     Toast.makeText(this, "Conta cadastrada com sucesso", Toast.LENGTH_SHORT).show()
                 } else {
                     Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()

@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.mobile.databinding.ActivityLoginBinding
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.FirebaseNetworkException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
@@ -37,20 +36,8 @@ class LoginActivity : AppCompatActivity() {
             startActivity(Intent(this, RegisterUserActivity::class.java))
         }
 
-        binding.tvForgotPassword.setOnClickListener {
-            val email = binding.etEmail.text.toString()
-            if (email.isNotEmpty()) {
-                auth.sendPasswordResetEmail(email)
-                    .addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            Toast.makeText(this, "Email de recuperação enviado", Toast.LENGTH_SHORT).show()
-                        } else {
-                            Toast.makeText(this, "Falha ao enviar email de recuperação: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
-                        }
-                    }
-            } else {
-                Toast.makeText(this, "Por favor, insira seu email", Toast.LENGTH_SHORT).show()
-            }
+        binding.tvForgotPassword.setOnClickListener{
+            startActivity(Intent(this, ForgotPasswordActivity::class.java))
         }
     }
 

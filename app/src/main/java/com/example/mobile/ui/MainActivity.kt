@@ -4,24 +4,19 @@ import PostAdapter
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mobile.OlaUserPreferences
 import com.example.mobile.Post
 import com.example.mobile.databinding.ActivityMainBinding
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
-
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.toObject
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var database: DatabaseReference
+    private lateinit var firestore: FirebaseFirestore
     private lateinit var postAdapter: PostAdapter
     private lateinit var auth: FirebaseAuth
     private val posts = mutableListOf<Post>()
@@ -31,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        database = FirebaseDatabase.getInstance().getReference("posts")
+        firestore = FirebaseFirestore.getInstance()
         auth = FirebaseAuth.getInstance()
 
         binding.btAdd.setOnClickListener{
@@ -55,27 +50,21 @@ class MainActivity : AppCompatActivity() {
         binding.recyclerView.adapter = postAdapter
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
 
-        database.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
+        // Recupera os posts do Firestore
+        firestore.collection("adocoes")
+            .addSnapshotListener { snapshots, e ->
+                if (e != null) {
+                    Toast.makeText(this@MainActivity, "Erro ao carregar posts: ${e.message}", Toast.LENGTH_SHORT).show()
+                    return@addSnapshotListener
+                }
+
                 posts.clear()
-                for (postSnapshot in snapshot.children) {
-                    val post = postSnapshot.getValue(Post::class.java)
-                    if (post != null) {
-                        posts.add(post)
-                    }
+                for (doc in snapshots!!) {
+                    val post = doc.toObject<Post>()
+                    posts.add(post)
                 }
                 postAdapter.notifyDataSetChanged()
             }
-
-            override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(
-                    this@MainActivity,
-                    "Erro ao carregar posts: ${error.message}",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-
-        })
 
         handleUserName()
     }
@@ -85,3 +74,4 @@ class MainActivity : AppCompatActivity() {
         binding.tvOlauser.text = "Olá, $name!"
     }
 }
+

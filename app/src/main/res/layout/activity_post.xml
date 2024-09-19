@@ -12,11 +12,11 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:layout_alignParentTop="true"
         android:background="#070030"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         android:elevation="4dp"
         android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        android:layout_alignParentTop="true">
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <TextView
             android:id="@+id/tv_olauser"
@@ -33,10 +33,10 @@
             android:id="@+id/bt_perfiluser"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:padding="16dp"
-            android:background="@drawable/perfiluser"
             android:layout_gravity="right"
-            android:layout_marginRight="16dp"/>
+            android:layout_marginRight="16dp"
+            android:background="@drawable/perfiluser"
+            android:padding="16dp" />
     </androidx.appcompat.widget.Toolbar>
 
     <LinearLayout
@@ -64,9 +64,9 @@
             android:background="@drawable/edit_text_cadastro"
             android:backgroundTint="@null"
             android:hint="Digite o nome do animal"
+            android:textColorHint="#808080"
             android:inputType="text"
-            android:padding="8dp"
-            android:textColorHint="#D9D9D9" />
+            android:padding="8dp"/>
 
         <EditText
             android:id="@+id/et_racaanimal"
@@ -78,7 +78,7 @@
             android:hint="Digite a raça do animal"
             android:inputType="text"
             android:padding="8dp"
-            android:textColorHint="#D9D9D9" />
+            android:textColorHint="#808080" />
 
         <EditText
             android:id="@+id/et_coranimal"
@@ -91,7 +91,7 @@
             android:hint="Digite a cor do animal"
             android:inputType="text"
             android:padding="8dp"
-            android:textColorHint="#D9D9D9" />
+            android:textColorHint="#808080" />
 
         <EditText
             android:id="@+id/et_descricao"
@@ -104,7 +104,7 @@
             android:hint="Digite a descrição do animal"
             android:inputType="text"
             android:padding="8dp"
-            android:textColorHint="#D9D9D9" />
+            android:textColorHint="#808080" />
 
         <Button
             android:id="@+id/bt_publi"
@@ -117,34 +117,41 @@
 
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/arrowback"
-        android:layout_width="47dp"
-        android:layout_height="42dp"
-        android:layout_marginEnd="5dp"
-        app:layout_constraintEnd_toStartOf="@+id/tv_textocadastro"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/arrowback1"
-        android:clickable="true"
-        tools:layout_editor_absoluteY="101dp" />
 
-    <TextView
-        android:id="@+id/tv_textocadastro"
-        android:layout_width="307dp"
-        android:layout_height="45dp"
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
         android:layout_marginBottom="40dp"
-        android:text="Criando novo post"
-        android:textAlignment="center"
-        android:gravity="center"
-        android:textColor="@color/black"
-        android:textSize="30sp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:padding="16dp"
         app:layout_constraintBottom_toTopOf="@+id/imageView5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.73"
+        app:layout_constraintHorizontal_bias="0.115"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:layout_constraintVertical_bias="0.931" />
+        app:layout_constraintVertical_bias="1.0">
+
+        <ImageView
+            android:id="@+id/arrowback"
+            android:layout_width="30dp"
+            android:layout_height="35dp"
+            android:clickable="true"
+            app:srcCompat="@drawable/arrowback1" />
+
+        <TextView
+            android:id="@+id/tv_textocadastro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Criando novo post"
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            android:textSize="26sp"
+            android:layout_marginStart="8dp" />
+
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/imageView5"

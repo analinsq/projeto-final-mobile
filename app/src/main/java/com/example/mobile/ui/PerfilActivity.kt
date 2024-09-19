@@ -48,13 +48,12 @@ class PerfilActivity : AppCompatActivity() {
     }
 
     private fun loadUserName(userId: String) {
-        // Recupera o nome do usuário do Firebase Database
         val userReference = database.child(userId)
         userReference.child("name").addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val name = snapshot.getValue(String::class.java)
                 if (name != null) {
-                    binding.tvPerfilNome.text = name // Exibe o nome na tela
+                    binding.tvPerfilNome.text = name
                 } else {
                     Toast.makeText(this@PerfilActivity, "Nome não encontrado", Toast.LENGTH_SHORT).show()
                 }

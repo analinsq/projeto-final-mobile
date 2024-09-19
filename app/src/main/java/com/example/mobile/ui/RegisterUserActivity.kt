@@ -27,6 +27,10 @@ class RegisterUserActivity : AppCompatActivity() {
             registerUser(username, email, password)
         }
 
+        binding.arrowback.setOnClickListener {
+            startActivity(Intent(this, LoginActivity::class.java))
+        }
+
     }
 
     private fun registerUser(username: String, email: String, password: String) {
@@ -35,15 +39,13 @@ class RegisterUserActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     val userId = auth.currentUser?.uid
                     if (userId != null) {
-                        // Salvando o nome do usuário no Firebase Database
                         val database = FirebaseDatabase.getInstance().getReference("users")
                         val userMap = mapOf(
-                            "name" to username,  // Salva o nome fornecido
+                            "name" to username,
                             "email" to email
                         )
                         database.child(userId).setValue(userMap).addOnCompleteListener { saveTask ->
                             if (saveTask.isSuccessful) {
-                                // Salvando localmente
                                 OlaUserPreferences(this).saveUserName(username)
                                 Toast.makeText(this, "Conta cadastrada com sucesso", Toast.LENGTH_SHORT).show()
                                 startActivity(Intent(this, LoginActivity::class.java))
@@ -60,21 +62,6 @@ class RegisterUserActivity : AppCompatActivity() {
         }
     }
 
-
-//    private fun registerUser(username: String, email: String, password: String) {
-//        if (validateData(username, email, password)) {
-//            FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password).addOnCompleteListener(){
-//                if (it.isSuccessful) {
-//                    startActivity(Intent(this, LoginActivity::class.java))
-//                    OlaUserPreferences(this).saveUserName(username)
-//                    Toast.makeText(this, "Conta cadastrada com sucesso", Toast.LENGTH_SHORT).show()
-//                } else {
-//                    Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
-//
-//                }
-//            }
-//        }
-//    }
 
 
     private fun validateData(username:String, email: String, password: String): Boolean{

@@ -3,6 +3,7 @@ package com.example.mobile.ui
 import PostAdapter
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -39,18 +40,13 @@ class MainActivity : AppCompatActivity() {
 
         val currentUser = auth.currentUser
         if (currentUser == null) {
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
-            finish()
-        } else {
-            Toast.makeText(this, "Bem-vindo(a), ${currentUser.email}", Toast.LENGTH_SHORT).show()
-        }
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()}
 
         postAdapter = PostAdapter(posts)
         binding.recyclerView.adapter = postAdapter
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
 
-        // Recupera os posts do Firestore
         firestore.collection("adocoes")
             .addSnapshotListener { snapshots, e ->
                 if (e != null) {

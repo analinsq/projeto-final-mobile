@@ -3,9 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#D9D9D9"
-    android:gravity="center">
+    android:background="@drawable/pattern"
+    android:gravity="center"
+    android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -29,17 +29,17 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="410dp"
-        android:layout_height="200dp"
+        android:layout_width="392dp"
+        android:layout_height="148dp"
+        android:layout_marginBottom="540dp"
+        android:background="@color/white"
         android:orientation="vertical"
         android:padding="20dp"
         android:paddingTop="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_textoperfil"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintHorizontal_bias="0.473"
+        app:layout_constraintStart_toStartOf="parent">
 
         <TextView
             android:id="@+id/tvPerfilNome"
@@ -47,7 +47,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:text="Nome"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:textColor="#808080"/>
 
         <TextView
             android:id="@+id/tvPerfilEmail"
@@ -55,54 +56,58 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:text="Email"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:textColor="#808080"/>
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/arrowback"
-        android:layout_width="47dp"
-        android:layout_height="42dp"
-        android:layout_marginTop="41dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="2dp"
-        android:clickable="true"
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:layout_marginBottom="38dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:padding="16dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintEnd_toStartOf="@+id/tv_textoperfil"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.056"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:srcCompat="@drawable/arrowback1" />
+        app:layout_constraintVertical_bias="0.45">
 
-    <TextView
-        android:id="@+id/tv_textoperfil"
-        android:layout_width="307dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="40dp"
-        android:gravity="center"
-        android:text="Perfil de Usuário"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.682"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        <ImageView
+            android:id="@+id/arrowback"
+            android:layout_width="30dp"
+            android:layout_height="35dp"
+            android:clickable="true"
+            app:srcCompat="@drawable/arrowback1" />
+
+        <TextView
+            android:id="@+id/tv_perfil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:text="Perfil"
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            android:textSize="26sp" />
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/bt_sair"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
-        android:layout_marginBottom="280dp"
-        android:backgroundTint="#FF8C00"
+        android:layout_marginBottom="52dp"
+        android:backgroundTint="#CB5C0C"
         android:text="Sair"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.075" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
